@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SirenFlow - Where Beauty Meets Web3</title>
+  <meta name="description" content="Connecting top models with leading Web3 projects. Empowering both sides.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
+    
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F0C040;
+      --gold-dark: #B8941F;
+      --black: #000000;
+      --gray-900: #0a0a0a;
+      --gray-800: #1a1a1a;
+      --gray-700: #2a2a2a;
+      --gray-600: #3a3a3a;
+      --gray-400: #888888;
+      --gray-300: #aaaaaa;
+      --white: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    
+    .nav-cta {
+      padding: 0.75rem 2rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      max-width: 1000px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-tag {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+    
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 200;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero h1 .gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 300;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-300);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+    
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 200;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-number.gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gray-400);
+      font-weight: 400;
+    }
+    
+    /* CTA Buttons */
+    .cta-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--gray-600);
+    }
+    
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+    
+    /* Section */
+    section {
+      padding: 8rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+    
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 200;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray-400);
+      font-weight: 300;
+    }
+    
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .card {
+      background: rgba(26, 26, 26, 0.5);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      border-radius: 24px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      backdrop-filter: blur(10px);
+    }
+    
+    .card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+      transform: translateY(-8px);
+      background: rgba(26, 26, 26, 0.8);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-title {
+      font-size: 1.75rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    
+    .card-tag {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    
+    .card-badge {
+      padding: 0.4rem 1rem;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+    
+    .card-description {
+      color: var(--gray-300);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    
+    .card-stats {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .card-stat-value {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+    
+    .card-stat-label {
+      font-size: 0.75rem;
+      color: var(--gray-400);
+    }
+    
+    /* Features */
+    .features {
+      background: var(--gray-900);
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+    }
+    
+    .feature-item {
+      text-align: center;
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+    
+    .feature-description {
+      color: var(--gray-400);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--gray-900);
+      padding: 4rem 2rem 2rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-description {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    .footer-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+      color: var(--gray-400);
+      font-size: 0.85rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .cta-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+    
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">SIRENFLOW</div>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#models">For Models</a></li>
+        <li><a href="#web3">For Projects</a></li>
+      </ul>
+      <button class="nav-cta">Connect Wallet</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <p class="hero-tag">Web3 ¡Á Beauty ¡Á Influence</p>
+      <h1>
+        Where Beauty<br>
+        Meets <span class="gold">Web3</span>
+      </h1>
+      <p class="hero-subtitle">
+        The premier platform connecting elite models and KOLs<br>
+        with the world's leading Web3 projects.
+      </p>
+      <div class="stats fade-in">
+        <div class="stat-item">
+          <div class="stat-number">127</div>
+          <div class="stat-label">Elite Models</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">42</div>
+          <div class="stat-label">Web3 Projects</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gold">$2.8M</div>
+          <div class="stat-label">Total Revenue</div>
+        </div>
+      </div>
+      <div class="cta-group">
+        <a class="btn btn-primary">I'm a Model</a>
+        <a class="btn btn-secondary">I'm a Web3 Project</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features" style="padding: 8rem 0;">
+    <section>
+      <div class="section-header fade-in">
+        <h2 class="section-title">Why <span style="background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">SirenFlow?</span></h2>
+        <p class="section-subtitle">Built for the next generation of digital influence</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-item fade-in">
+          <div class="feature-icon">??</div>
+          <h3 class="feature-title">Verified & Vetted</h3>
+          <p class="feature-description">Every model and project is rigorously verified on-chain. No fake followers, no rug pulls. Quality guaranteed.</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">?</div>
+          <h3 class="feature-title">Instant Matching</h3>
+          <p class="feature-description">AI-powered matching engine connects models with the perfect Web3 projects based on audience, niche, and performance.</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">??</div>
+          <h3 class="feature-title">On-Chain Payments</h3>
+          <p class="feature-description">Smart contract escrow ensures models get paid on time, every time. Full transparency, zero disputes.</p>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">??</div>
+          <h3 class="feature-title">Global Reach</h3>
+          <p class="feature-description">From Asia to Europe to the Americas ¡ª our network spans 30+ countries, connecting global audiences with Web3 innovation.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Featured Projects -->
+  <section id="projects">
+    <div class="section-header fade-in">
+      <h2 class="section-title">Featured <span style="background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Projects</span></h2>
+      <p class="section-subtitle">Hand-picked opportunities from top Web3 teams</p>
+    </div>
+    <div class="card-grid">
+      <div class="card fade-in">
+        <div class="card-header">
+          <div>
+            <div class="card-title">LuminaSwap</div>
+            <div class="card-tag">Solana DEX</div>
+          </div>
+          <span class="card-badge">Active</span>
+        </div>
+        <p class="card-description">The fastest DEX on the Solana ecosystem with $280M TVL. Looking for top-tier models to represent the future of decentralized finance.</p>
+        <div class="card-stats">
+          <div>
+            <div class="card-stat-value">$5,000</div>
+            <div class="card-stat-label">Starting Budget</div>
+          </div>
+          <div>
+            <div class="card-stat-value">18</div>
+            <div class="card-stat-label">Models Joined</div>
+          </div>
+          <div>
+            <div class="card-stat-value">30d</div>
+            <div class="card-stat-label">Campaign Length</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Vortex Perp</div>
+            <div class="card-tag">Perpetual Exchange</div>
+          </div>
+          <span class="card-badge">Hot ??</span>
+        </div>
+        <p class="card-description">10x leverage perpetual contracts with zero slippage. One of the fastest-growing derivatives platforms in DeFi history.</p>
+        <div class="card-stats">
+          <div>
+            <div class="card-stat-value">$15,000</div>
+            <div class="card-stat-label">Starting Budget</div>
+          </div>
+          <div>
+            <div class="card-stat-value">7</div>
+            <div class="card-stat-label">Spots Left</div>
+          </div>
+          <div>
+            <div class="card-stat-value">60d</div>
+            <div class="card-stat-label">Campaign Length</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-in">
+        <div class="card-header">
+          <div>
+            <div class="card-title">NeoVault</div>
+            <div class="card-tag">DeFi Yield Protocol</div>
+          </div>
+          <span class="card-badge">New</span>
+        </div>
+        <p class="card-description">Automated yield optimization across 12 chains. Earn more with less. Backed by top-tier VCs and growing at 200% MoM.</p>
+        <div class="card-stats">
+          <div>
+            <div class="card-stat-value">$8,000</div>
+            <div class="card-stat-label">Starting Budget</div>
+          </div>
+          <div>
+            <div class="card-stat-value">12</div>
+            <div class="card-stat-label">Models Joined</div>
+          </div>
+          <div>
+            <div class="card-stat-value">45d</div>
+            <div class="card-stat-label">Campaign Length</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <div style="background: #0a0a0a; padding: 8rem 0;" id="how">
+    <section>
+      <div class="section-header fade-in">
+        <h2 class="section-title">How It <span style="background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Works</span></h2>
+        <p class="section-subtitle">Simple. Transparent. Powerful.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; counter-reset: steps;">
+        <div class="card fade-in" style="counter-increment: steps; text-align: center;">
+          <div style="font-size: 3rem; font-weight: 200; background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;">01</div>
+          <h3 style="font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem;">Connect Wallet</h3>
+          <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Connect your Web3 wallet to verify identity and secure your profile on-chain.</p>
+        </div>
+        <div class="card fade-in" style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 200; background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;">02</div>
+          <h3 style="font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem;">Build Your Profile</h3>
+          <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Showcase your audience, metrics, and past campaigns. Let your numbers speak.</p>
+        </div>
+        <div class="card fade-in" style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 200; background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;">03</div>
+          <h3 style="font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem;">Get Matched</h3>
+          <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Our AI engine matches you with ideal Web3 projects based on your niche and audience demographics.</p>
+        </div>
+        <div class="card fade-in" style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 200; background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1.5rem;">04</div>
+          <h3 style="font-size: 1.2rem; font-weight: 400; margin-bottom: 1rem;">Earn & Grow</h3>
+          <p style="color: #888; font-size: 0.9rem; line-height: 1.6;">Execute campaigns, get paid via smart contract, build your Web3 reputation score.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CTA Section -->
+  <section style="text-align: center;">
+    <div class="fade-in">
+      <p style="font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: #888; margin-bottom: 2rem;">Join the Movement</p>
+      <h2 style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 200; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Ready to Enter<br><span style="background: linear-gradient(135deg, #D4AF37, #F0C040); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">the Future?</span></h2>
+      <p style="color: #888; font-size: 1.1rem; margin-bottom: 3rem;">Join 127 elite models and 42 Web3 projects already on SirenFlow.</p>
+      <div class="cta-group">
+        <a class="btn btn-primary">Apply as Model</a>
+        <a class="btn btn-secondary">List Your Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">SIRENFLOW</div>
+        <p class="footer-description">Connecting elite models with leading Web3 projects. The future of digital influence is decentralized.</p>
+      </div>
+      <div>
+        <p class="footer-title">Platform</p>
+        <ul class="footer-links">
+          <li><a href="#">Browse Projects</a></li>
+          <li><a href="#">Model Directory</a></li>
+          <li><a href="#">Academy</a></li>
+          <li><a href="#">Analytics</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>? 2026 SirenFlow. All rights reserved. Built on Web3.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Counter animation
+    function animateCounter(el, target, prefix = '', suffix = '') {
+      let start = 0;
+      const duration = 2000;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+          start = target;
+          clearInterval(timer);
+        }
+        if (target >= 1000000) {
+          el.textContent = prefix + (start / 1000000).toFixed(1) + 'M' + suffix;
+        } else {
+          el.textContent = prefix + Math.floor(start) + suffix;
+        }
+      }, 16);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(document.querySelectorAll('.stat-number')[0], 127);
+          animateCounter(document.querySelectorAll('.stat-number')[1], 42);
+          animateCounter(document.querySelectorAll('.stat-number')[2], 2800000, '$');
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsEl = document.querySelector('.stats');
+    if (statsEl) statsObserver.observe(statsEl);
+  </script>
+</body>
+</html>
