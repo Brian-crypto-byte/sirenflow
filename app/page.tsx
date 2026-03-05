@@ -11,19 +11,19 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 导航栏 */}
-      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      {/* 导航栏 - 精确模仿 MoonPay */}
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <div className="max-w-[1400px] mx-auto px-8 py-5">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-900">SIRENFLOW</Link>
-            <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
-              <Link href="/projects" className="hover:text-purple-600">Projects</Link>
-              <Link href="/models" className="hover:text-purple-600">Models</Link>
-              <Link href="/activities" className="hover:text-purple-600">Activities</Link>
+            <Link href="/" className="text-[22px] font-bold text-gray-900 tracking-tight">SIRENFLOW</Link>
+            <div className="hidden lg:flex space-x-10 text-[15px] font-medium text-gray-700">
+              <Link href="/projects" className="hover:text-gray-900 transition-colors">Projects</Link>
+              <Link href="/models" className="hover:text-gray-900 transition-colors">Models</Link>
+              <Link href="/activities" className="hover:text-gray-900 transition-colors">Activities</Link>
             </div>
             <div className="flex items-center space-x-4">
-              <button className="text-sm font-medium text-gray-700 hover:text-purple-600">Sign in</button>
-              <button className="px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700">
+              <button className="text-[15px] font-medium text-gray-700 hover:text-gray-900 transition-colors">Sign in</button>
+              <button className="px-6 py-2.5 bg-[#7c3aed] text-white rounded-full text-[15px] font-semibold hover:bg-[#6d28d9] transition-all">
                 Get started
               </button>
             </div>
@@ -31,48 +31,47 @@ export default async function Home() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
-            The best way to connect<br/>models with Web3 projects
+      {/* Hero - 精确模仿 MoonPay */}
+      <section className="pt-40 pb-24 px-8">
+        <div className="max-w-[900px] mx-auto text-center">
+          <h1 className="text-[64px] leading-[1.1] font-bold mb-6 text-gray-900 tracking-tight">
+            The best way to connect models with Web3 projects
           </h1>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+          <p className="text-[20px] leading-relaxed text-gray-600 mb-12 max-w-[700px] mx-auto">
             Discover opportunities, showcase talent, and build the future of Web3 together.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/projects" className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700">
+            <Link href="/projects" className="px-8 py-4 bg-[#7c3aed] text-white rounded-full text-[16px] font-semibold hover:bg-[#6d28d9] transition-all shadow-sm">
               Browse Projects
             </Link>
-            <Link href="/models" className="px-8 py-4 bg-gray-100 text-gray-900 rounded-full font-semibold hover:bg-gray-200">
+            <Link href="/models" className="px-8 py-4 bg-gray-100 text-gray-900 rounded-full text-[16px] font-semibold hover:bg-gray-200 transition-all">
               View Models
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 项目展示卡片 - 横向滚动 */}
-      <section className="pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Projects</h2>
-          <div className="overflow-x-auto pb-4 -mx-6 px-6">
-            <div className="flex gap-6 min-w-max">
+      {/* 项目卡片 - 横向滚动 */}
+      <section className="pb-32 px-8">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="overflow-x-auto pb-6 -mx-8 px-8 scrollbar-hide">
+            <div className="flex gap-6 w-max">
               {projects.map((project: any) => (
-                <div key={project.id} className="w-96 bg-white rounded-3xl border border-gray-200 p-8 hover:shadow-xl transition-shadow">
-                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-                    <span className="text-3xl">💼</span>
+                <div key={project.id} className="w-[420px] bg-white rounded-[32px] border border-gray-200 p-10 hover:shadow-2xl transition-all">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-100 to-purple-200 rounded-[24px] flex items-center justify-center mb-8">
+                    <span className="text-4xl">💼</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                  <p className="text-gray-600 mb-6 line-clamp-3">{project.description}</p>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl font-bold text-purple-600">{project.budget}</span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  <h3 className="text-[28px] font-bold text-gray-900 mb-4 leading-tight">{project.title}</h3>
+                  <p className="text-[16px] leading-relaxed text-gray-600 mb-8">{project.description}</p>
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="text-[32px] font-bold text-[#7c3aed]">{project.budget}</span>
+                    <span className={`px-4 py-2 rounded-full text-[13px] font-semibold ${
                       project.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
                     }`}>
                       {project.status}
                     </span>
                   </div>
-                  <Link href="/projects" className="block w-full py-3 bg-purple-600 text-white rounded-full text-center font-semibold hover:bg-purple-700">
+                  <Link href="/projects" className="block w-full py-4 bg-[#7c3aed] text-white rounded-full text-center text-[16px] font-semibold hover:bg-[#6d28d9] transition-all">
                     Apply Now
                   </Link>
                 </div>
