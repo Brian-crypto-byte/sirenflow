@@ -1,6 +1,14 @@
 import Link from 'next/link';
 
-export default function Home() {
+async function getStats() {
+  const res = await fetch('http://localhost:3000/api/stats', { cache: 'no-store' });
+  if (!res.ok) return { modelsCount: 0, projectsCount: 0, totalBudget: '$0' };
+  return res.json();
+}
+
+export default async function Home() {
+  const stats = await getStats();
+
   return (
     <div className="min-h-screen bg-gradient relative overflow-hidden">
       {/* 背景视频 */}
@@ -43,26 +51,25 @@ export default function Home() {
           {/* 数据卡片 */}
           <div className="grid grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
             <div className="glass-card p-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">12</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.modelsCount}</div>
               <div className="text-sm text-gray-500 font-medium">Models</div>
             </div>
             <div className="glass-card p-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">6</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.projectsCount}</div>
               <div className="text-sm text-gray-500 font-medium">Projects</div>
             </div>
             <div className="glass-card p-8">
-              <div className="text-5xl font-bold gradient-text mb-2">$440K</div>
+              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.totalBudget}</div>
               <div className="text-sm text-gray-500 font-medium">Total Budget</div>
             </div>
           </div>
-          
-          {/* CTA */}
-          <div className="flex justify-center gap-4">
+
+          <div className="flex gap-4 justify-center">
             <Link href="/models" className="px-8 py-4 gradient-purple text-white rounded-full font-semibold hover:shadow-xl transition-all">
-              I'm a Model
+              Explore Models
             </Link>
-            <Link href="/projects" className="px-8 py-4 bg-white border-2 border-gray-200 text-gray-900 rounded-full font-semibold hover:border-purple-300 transition-all">
-              I'm a Project
+            <Link href="/projects" className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:shadow-xl transition-all border border-purple-200">
+              View Projects
             </Link>
           </div>
         </div>
