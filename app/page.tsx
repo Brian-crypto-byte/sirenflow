@@ -10,7 +10,14 @@ export default async function Home() {
   const projects = await getProjects();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative">
+      {/* 背景视频 */}
+      <div className="fixed inset-0 z-0">
+        <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-40">
+          <source src="https://www.miss.live/images/bannerPC.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div className="relative z-10">
       {/* 导航栏 - 精确模仿 MoonPay */}
       <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-[1400px] mx-auto px-8 py-5">
@@ -80,6 +87,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
