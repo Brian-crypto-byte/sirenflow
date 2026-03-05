@@ -1,80 +1,86 @@
 import Link from 'next/link';
 
-async function getStats() {
-  const res = await fetch('http://localhost:3000/api/stats', { cache: 'no-store' });
-  if (!res.ok) return { modelsCount: 0, projectsCount: 0, totalBudget: '$0' };
+async function getProjects() {
+  const res = await fetch('http://localhost:3000/api/projects', { cache: 'no-store' });
+  if (!res.ok) return [];
   return res.json();
 }
 
 export default async function Home() {
-  const stats = await getStats();
+  const projects = await getProjects();
 
   return (
-    <div className="min-h-screen bg-gradient relative overflow-hidden">
-      {/* 背景视频 */}
-      <div className="fixed inset-0 z-0 opacity-50">
-        <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-          <source src="https://www.miss.live/images/bannerPC.mp4" type="video/mp4" />
-        </video>
-      </div>
-      
-      <div className="relative z-10">
+    <div className="min-h-screen bg-white">
       {/* 导航栏 */}
-      <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold text-purple-600">SIRENFLOW</Link>
-            <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
-              <Link href="/projects" className="hover:text-purple-600 transition-colors">Projects</Link>
-              <Link href="/models" className="hover:text-purple-600 transition-colors">Models</Link>
-              <Link href="/activities" className="hover:text-purple-600 transition-colors">Activities</Link>
+            <Link href="/" className="text-2xl font-bold text-gray-900">SIRENFLOW</Link>
+            <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
+              <Link href="/projects" className="hover:text-purple-600">Projects</Link>
+              <Link href="/models" className="hover:text-purple-600">Models</Link>
+              <Link href="/activities" className="hover:text-purple-600">Activities</Link>
             </div>
-            <button className="px-6 py-2.5 gradient-purple text-white rounded-full text-sm font-semibold hover:shadow-lg transition-all">
-              Connect Wallet
-            </button>
+            <div className="flex items-center space-x-4">
+              <button className="text-sm font-medium text-gray-700 hover:text-purple-600">Sign in</button>
+              <button className="px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700">
+                Get started
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-4 text-xs font-bold tracking-widest text-purple-600 uppercase">Web3 × Beauty</div>
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight text-gray-900">
-            Beauty is<br/>
-            <span className="gradient-text">Productivity</span>
+      <section className="pt-32 pb-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+            The best way to connect<br/>models with Web3 projects
           </h1>
-          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Connecting models with Web3 projects. Empowering both sides.
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+            Discover opportunities, showcase talent, and build the future of Web3 together.
           </p>
-          
-          {/* 数据卡片 */}
-          <div className="grid grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-            <div className="glass-card p-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.modelsCount}</div>
-              <div className="text-sm text-gray-500 font-medium">Models</div>
-            </div>
-            <div className="glass-card p-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.projectsCount}</div>
-              <div className="text-sm text-gray-500 font-medium">Projects</div>
-            </div>
-            <div className="glass-card p-8">
-              <div className="text-5xl font-bold text-gray-900 mb-2">{stats.totalBudget}</div>
-              <div className="text-sm text-gray-500 font-medium">Total Budget</div>
-            </div>
-          </div>
-
           <div className="flex gap-4 justify-center">
-            <Link href="/models" className="px-8 py-4 gradient-purple text-white rounded-full font-semibold hover:shadow-xl transition-all">
-              Explore Models
+            <Link href="/projects" className="px-8 py-4 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700">
+              Browse Projects
             </Link>
-            <Link href="/projects" className="px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:shadow-xl transition-all border border-purple-200">
-              View Projects
+            <Link href="/models" className="px-8 py-4 bg-gray-100 text-gray-900 rounded-full font-semibold hover:bg-gray-200">
+              View Models
             </Link>
           </div>
         </div>
       </section>
-      </div>
+
+      {/* 项目展示卡片 - 横向滚动 */}
+      <section className="pb-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Projects</h2>
+          <div className="overflow-x-auto pb-4 -mx-6 px-6">
+            <div className="flex gap-6 min-w-max">
+              {projects.map((project: any) => (
+                <div key={project.id} className="w-96 bg-white rounded-3xl border border-gray-200 p-8 hover:shadow-xl transition-shadow">
+                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                    <span className="text-3xl">💼</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{project.title}</h3>
+                  <p className="text-gray-600 mb-6 line-clamp-3">{project.description}</p>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-2xl font-bold text-purple-600">{project.budget}</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      project.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {project.status}
+                    </span>
+                  </div>
+                  <Link href="/projects" className="block w-full py-3 bg-purple-600 text-white rounded-full text-center font-semibold hover:bg-purple-700">
+                    Apply Now
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
